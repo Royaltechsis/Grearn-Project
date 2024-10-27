@@ -36,7 +36,7 @@ export default function HomeScreen() {
         <View>
           <Text style={styles.white}>Grearn</Text>
           <Text style={styles.grey}>Total assets</Text>
-          <View style={styles.row}>
+          <View style={[styles.row, ]}>
             <Text style={styles.white}># 0.0</Text>
             <AntDesign name="eye" color={'white'} size={25} />
           </View>

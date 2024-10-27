@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, ScrollView, Text, Button, Alert } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Text, Button, Alert, Touchable, TouchableOpacity } from 'react-native';
+import {Link} from 'expo-router'
 import { Picker } from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -9,12 +10,12 @@ export default function DropdownComponent() {
 
   // Dummy Data for Items
   const items = [
-    { id: 1, name: 'Product 1', category: 'Electronics', price: 'NGN 5000', rating: '4.5' },
-    { id: 2, name: 'Product 2', category: 'Clothing', price: 'NGN 3000', rating: '4.0' },
-    { id: 3, name: 'Product 3', category: 'Books', price: 'NGN 2000', rating: '4.2' },
-    { id: 4, name: 'Product 4', category: 'Shoes', price: 'NGN 7000', rating: '3.8' },
-    { id: 5, name: 'Product 5', category: 'Accessories', price: 'NGN 1500', rating: '4.9' },
-    { id: 6, name: 'Product 6', category: 'Groceries', price: 'NGN 2500', rating: '4.3' },
+    { id: 1, name: 'Product 1', category: 'Maize', price: 'NGN 5000', rating: '2%' },
+    { id: 2, name: 'Product 2', category: 'Maize', price: 'NGN 3000', rating: '2%' },
+    { id: 3, name: 'Product 3', category:'Maize', price: 'NGN 2000', rating: '2%' },
+    { id: 4, name: 'Product 4', category: 'Maize', price: 'NGN 7000', rating: '2%' },
+    { id: 5, name: 'Product 5', category: 'Maize', price: 'NGN 1500', rating: '2%' },
+    { id: 6, name: 'Product 6', category: 'Maize', price: 'NGN 2500', rating: '2%' },
   ];
 
   function Item({ name, category, price, rating }: any) {
@@ -36,18 +37,21 @@ export default function DropdownComponent() {
           <Text style={styles.itemName}>{name}</Text>
           <Text style={styles.itemCategory}>{category}</Text>
           <View style={styles.quantityControl}>
-            <AntDesign name="minussquare" color="black" size={25} onPress={handleDecrease} />
+            <AntDesign name="minussquare" color="#6CBC37" size={20} onPress={handleDecrease} />
             <Text style={styles.quantityText}>{quantity}</Text>
-            <AntDesign name="plussquare" color="black" size={25} onPress={handleIncrease} />
+            <AntDesign name="plussquare" color="#6CBC37" size={20} onPress={handleIncrease} />
           </View>
           <View style={styles.buttonContainer}>
-            <Button title="Buy" color="#4CAF50" />
-            <Button title="Sell" color="#FF5722" />
+          <TouchableOpacity style={{ backgroundColor: '#6CBC37', padding: 5, borderRadius: 5, }}><Text style={{ color: 'white', fontSize: 12, width: 50, textAlign: 'center'}}>Buy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ backgroundColor: 'red', padding:5, borderRadius: 5, }}><Text style={{ color: 'white', fontSize: 12, width: 50, textAlign: 'center'}}>Sell</Text>
+          </TouchableOpacity>
+            
           </View>
         </View>
         <View style={styles.priceRating}>
           <Text style={styles.priceText}>{price}</Text>
-          <Text style={styles.ratingText}>Rating: {rating}</Text>
+          <Text style={styles.ratingText}> {rating}</Text>
         </View>
       </View>
     );
@@ -81,7 +85,7 @@ export default function DropdownComponent() {
             <Picker.Item label="NGN 5000" value="NGN 5000" />
           </Picker>
         </View>
-        <Image source={require('../../assets/images/History.png')} style={styles.image} />
+        <Link href='../screens/transactions.tsx'> <Image source={require('../../assets/images/History.png')} style={styles.image} /></Link>
       </View>
 
       {/* Scrollable List of Items */}
@@ -136,20 +140,22 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#6CBC37',
     borderRadius: 10,
-    backgroundColor: '#f9f9f9',
+    width: '90%',
+    alignSelf: 'center',
+
   },
   itemDetails: {
-    flex: 3,
+    flex: 1,
   },
   itemName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   itemCategory: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666',
     marginBottom: 10,
   },
@@ -164,8 +170,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '50%',
+    gap: 10,
   },
   priceRating: {
     flex: 1,

@@ -8,7 +8,7 @@ export default function Cards() {
             </View>
             <View style={styles.addCardContainer}>
                 <TouchableOpacity onPress={() => console.log('Add New Card')} style={styles.buttonContainer}>
-                    <Link to="/add-card" href='../screens/cardForm' style={styles.button}>Add Crd</Link>
+                    <Link to="/add-card" href='../screens/cardForm' style={styles.button}>Add Card</Link>
                 </TouchableOpacity>
             </View>
         </ScrollView>

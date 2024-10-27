@@ -12,16 +12,16 @@ export default function TabComponent() {
   // Data for each tab
   const itemsData = {
     'South West': [
-      { name: 'Item 1', category: 'Category 1', price: '$100', rate: '5.0', image: 'https://via.placeholder.com/50' },
-      { name: 'Item 2', category: 'Category 2', price: '$150', rate: '4.5', image: 'https://via.placeholder.com/50' },
+      { name: 'Item 1', category: 'Category 1', price: 'NGN100', rate: '20%', image: 'https://via.placeholder.com/30' },
+      { name: 'Item 2', category: 'Category 2', price: 'NGN150', rate: '20%', image: 'https://via.placeholder.com/30' },
     ],
     'North West': [
-      { name: 'Item 3', category: 'Category 3', price: '$200', rate: '4.0', image: 'https://via.placeholder.com/50' },
-      { name: 'Item 4', category: 'Category 4', price: '$250', rate: '4.8', image: 'https://via.placeholder.com/50' },
+      { name: 'Item 3', category: 'Category 3', price: 'NGN200', rate: '20%', image: 'https://via.placeholder.com/30' },
+      { name: 'Item 4', category: 'Category 4', price: 'NGN250', rate: '20%', image: 'https://via.placeholder.com/30' },
     ],
     'South East': [
-      { name: 'Item 5', category: 'Category 5', price: '$300', rate: '5.0', image: 'https://via.placeholder.com/50' },
-      { name: 'Item 6', category: 'Category 6', price: '$350', rate: '4.9', image: 'https://via.placeholder.com/50' },
+      { name: 'Item 5', category: 'Category 5', price: 'NGN300', rate: '20%', image: 'https://via.placeholder.com/30' },
+      { name: 'Item 6', category: 'Category 6', price: 'NGN350', rate: '20%', image: 'https://via.placeholder.com/30' },
     ],
   };
 
@@ -30,17 +30,16 @@ export default function TabComponent() {
     return (
       <View style={styles.itemContainer}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
-            <Image source={{ uri: image }} style={styles.itemImage} />
-            <View style={styles.itemDetails}>
-                <Text style={styles.itemName}>{name}</Text>
-                <Text style={styles.itemCategory}>{category}</Text>
-            </View>
+          <Image source={{ uri: image }} style={styles.itemImage} />
+          <View style={styles.itemDetails}>
+            <Text style={styles.itemName}>{name}</Text>
+            <Text style={styles.itemCategory}>{category}</Text>
+          </View>
         </View>
         <View>
-            <Text style={styles.itemPrice}>{price}</Text>
-            <Text style={styles.itemRate}>Rating: {rate}</Text>
+          <Text style={styles.itemPrice}>{price}</Text>
+          <Text style={styles.itemRate}> {rate}</Text>
         </View>
-
       </View>
     );
   };
@@ -50,15 +49,24 @@ export default function TabComponent() {
       {/* Horizontal ScrollView for tabs */}
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.tabsContainer}>
         {/* Tab 1 */}
-        <TouchableOpacity style={styles.tab} onPress={() => handleTabClick('South West')}>
+        <TouchableOpacity
+          style={[styles.tab, selectedTab === 'South West' && styles.activeTab]}
+          onPress={() => handleTabClick('South West')}
+        >
           <Text style={[styles.tabText, selectedTab === 'South West' && styles.activeTabText]}>South West</Text>
         </TouchableOpacity>
         {/* Tab 2 */}
-        <TouchableOpacity style={styles.tab} onPress={() => handleTabClick('North West')}>
+        <TouchableOpacity
+          style={[styles.tab, selectedTab === 'North West' && styles.activeTab]}
+          onPress={() => handleTabClick('North West')}
+        >
           <Text style={[styles.tabText, selectedTab === 'North West' && styles.activeTabText]}>North West</Text>
         </TouchableOpacity>
         {/* Tab 3 */}
-        <TouchableOpacity style={styles.tab} onPress={() => handleTabClick('South East')}>
+        <TouchableOpacity
+          style={[styles.tab, selectedTab === 'South East' && styles.activeTab]}
+          onPress={() => handleTabClick('South East')}
+        >
           <Text style={[styles.tabText, selectedTab === 'South East' && styles.activeTabText]}>South East</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -91,11 +99,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   tab: {
-    marginRight: 15,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
+    borderBottomWidth: 2,
+    borderBottomColor: 'gray',
+  },
+  activeTab: {
+    borderBottomColor: '#6CBC37',  // Primary color for active tab
   },
   tabText: {
     fontSize: 16,
@@ -132,10 +142,10 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 14,
   },
   itemCategory: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'gray',
   },
   itemPrice: {

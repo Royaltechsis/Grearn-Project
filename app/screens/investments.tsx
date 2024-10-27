@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet, Image, ScrollView } from 'react-native';
-import { Link } from 'expo-router';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Investments() {
+    const navigation = useNavigation();
+
     // Array of dummy investment items
     const investments = [
         {
@@ -36,9 +38,12 @@ export default function Investments() {
     ];
 
     // Investment card component
-    function InvestItem({ item }): React.JSX.Element {
+    function InvestItem({ item }) {
         return (
-            <View style={styles.card}>
+            <TouchableOpacity
+                style={styles.card}
+                onPress={() => navigation.navigate('singleinvestment', { investment: item })}
+            >
                 <Image source={item.image} style={styles.image} />
                 <View style={styles.cardContent}>
                     <Text style={styles.title}>{item.name}</Text>
@@ -47,13 +52,12 @@ export default function Investments() {
                     </Text>
                     <Text style={styles.description}>{item.description}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {/* Loop through investments array to render InvestItem */}
             {investments.map(item => (
                 <InvestItem key={item.id} item={item} />
             ))}
@@ -61,7 +65,7 @@ export default function Investments() {
     );
 }
 
-// Styles
+// Styles for Investments page
 const styles = StyleSheet.create({
     container: {
         padding: 20,
@@ -70,12 +74,11 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         borderWidth: 1,
-        borderColor: '#6CBC37', // primary color border
+        borderColor: '#6CBC37',
         borderRadius: 10,
         backgroundColor: '#fff',
         marginBottom: 20,
         padding: 15,
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
         width: '100%',
         alignItems: 'center',
     },
@@ -98,25 +101,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     primaryColor: {
-        color: '#6CBC37', // primary color
+        color: '#6CBC37',
         fontWeight: 'bold',
     },
     description: {
         fontSize: 14,
         color: '#555',
-    },
-    button: {
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderWidth: 1,
-        borderColor: '#6CBC37',
-        borderRadius: 8,
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    linkText: {
-        color: '#6CBC37',
-        fontWeight: 'bold',
-        fontSize: 16,
     },
 });

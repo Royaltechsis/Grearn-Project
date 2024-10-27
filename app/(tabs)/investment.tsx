@@ -41,14 +41,15 @@ export default function ActivePackages() {
             <View style={styles.card}>
                 <Image source={item.image} style={styles.image} />
                 <View style={styles.textContainer}>
-                    <Text style={styles.title}>{item.name}</Text>
+                    {/* <Text style={styles.title}>{item.name}</Text> */}
                     <Text style={styles.description}>{item.description}</Text>
-                    <Text style={styles.harvest}>Harvest Period: {item.harvestPeriod}</Text>
+
                 </View>
                 <View style={styles.row}>
                     <View style={styles.column}>
                         <Text>Principal</Text>
                         <Text>Profit</Text>
+                        <Text style={styles.harvest}>Harvest Period: {item.harvestPeriod}</Text>
                     </View>
                     <View style={styles.column}>
                         <Text>Principal</Text>
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     description: {
         marginTop: 5,
         fontSize: 14,
+        color: 'gray',
     },
     harvest: {
         marginTop: 10,
@@ -113,9 +115,10 @@ const styles = StyleSheet.create({
     column: {
         flex: 1,
         alignItems: 'center',
+        textAlign: 'left',
     },
     button: {
-        backgroundColor: '#007BFF',
+        backgroundColor: '#6CBC37',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
