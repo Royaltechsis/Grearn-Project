@@ -1,37 +1,62 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+    return (
+        <Tabs
+            screenOptions={{    
+                tabBarActiveTintColor: 'white',
+                    tabBarStyle: {
+                    backgroundColor: '#6CBC37',
+                },
+                headerShown: false
+            }}
+        >
+            <Tabs.Screen
+                name='index'
+                options={{
+                    title: 'Home',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'home-sharp' : 'home-outline'} size={26} color='white' />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='cards'
+                options={{
+                    title: 'Cards',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'card' : 'card-outline'} size={26} color='white' />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='trade'
+                options={{
+                    title: 'Trade',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'swap-vertical' : 'swap-vertical-outline'} size={26} color='white' />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='investment'
+                options={{
+                    title: 'Investment',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'cash-sharp' : 'cash-outline'} size={26} color='white' />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name='profile'
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'person-sharp' : 'person-outline'} size={26} color='white' />
+                    ),
+                }}
+            />
+        </Tabs>
+    );
 }

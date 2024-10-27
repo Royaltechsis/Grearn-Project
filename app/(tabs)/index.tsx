@@ -1,70 +1,117 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { ScrollView, View, Text, Image, Pressable , } from 'react-native';
+import { Link } from 'expo-router';
+import { styles } from '../styles'; // Make sure the path is correct
+import TabComponent from '@/components/tabComponent'
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      
+      {/* Profile Section */}
+      <View style={styles.innerContainer}>
+        <View style={styles.profileContainer}>
+          <View style={styles.imageContainer}>
+            {/* Placeholder image */}
+            <Image 
+              source={{ uri: 'https://via.placeholder.com/100' }} 
+              style={styles.profileImage} 
+              accessible={true} 
+              accessibilityLabel="Profile picture"
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.black}>Good Morning,</Text>
+            <Text style={styles.black}>Oseni Oluwabunmi</Text>
+          </View>
+        </View>
+        {/* Notification Icon */}
+        <View>
+          <EvilIcons name="bell" color={'black'} size={25} />
+        </View>
+      </View>
+
+      {/* Assets & Investment Section */}
+      <View style={[styles.innerContainer, styles.primaryBackground]}>
+        <View>
+          <Text style={styles.white}>Grearn</Text>
+          <Text style={styles.grey}>Total assets</Text>
+          <View style={styles.row}>
+            <Text style={styles.white}># 0.0</Text>
+            <AntDesign name="eye" color={'white'} size={25} />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.white}>Investment Package</Text>
+          <Text style={styles.black}>Maize</Text>
+        </View>
+      </View>
+
+      {/* Actions (Withdraw) Section */}
+      <View style={styles.container}>
+  <View style={[styles.row, styles.whiteBackground, styles.elevated, styles.innerContainer]}>
+    <Link href='../screens/transactions'>
+    <View style={styles.fimageContainer}>
+      <Image source={require('../../assets/images/History.png')} style={styles.frameImage} />
+      <Text style={styles.black}>History</Text>
+    </View>
+    </Link>
+    <Link href='../screens/fund'>
+    <View style={styles.fimageContainer}>
+      <Image source={require('../../assets/images/addmoney.png')} style={styles.frameImage} />
+      <Text style={styles.black}>Add Money</Text>
+    </View>
+    </Link>
+    <Link href='../screens/withdraw'>
+    <View style={styles.fimageContainer}>
+      <Image source={require('../../assets/images/withdraw.png')} style={styles.frameImage} />
+      <Text style={styles.black}>Withdraw</Text>
+    </View>
+    </Link>
+  </View>
+</View>
+
+
+
+
+<View style={styles.container}>
+  <View style={styles.columnContainer}>
+    <Text style={styles.black}>Live Stocks</Text>
+
+    {/* ScrollView for horizontal sliding */}
+    <ScrollView 
+      horizontal={true} 
+      showsHorizontalScrollIndicator={false}
+      style={styles.scrollContainer} // Hides the scroll indicator for a cleaner look
+    >
+      <Image
+        source={require('../../assets/images/cows.png')}
+        style={styles.stockImage}
+        accessible={true}
+        accessibilityLabel="Image of cows"
+      />
+      <Image
+        source={require('../../assets/images/chicken.png')}
+        style={styles.stockImage}
+        accessible={true}
+        accessibilityLabel="Image of sheep"
+      />
+      <Image
+        source={require('../../assets/images/lamb.png')}
+        style={styles.stockImage}
+        accessible={true}
+        accessibilityLabel="Image of goats"
+      />
+      {/* Add more images if needed */}
+    </ScrollView>
+  </View>
+</View>
+
+    <View>
+      <TabComponent />
+    </View>
+
+
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
