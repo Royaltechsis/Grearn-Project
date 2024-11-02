@@ -1,10 +1,17 @@
 import { AntDesign, EvilIcons } from '@expo/vector-icons';
 import { ScrollView, View, Text, Image, Pressable , } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useRouter} from 'expo-router';
 import { styles } from '../styles'; // Make sure the path is correct
 import TabComponent from '@/components/tabComponent'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  const handleLogout = async() => {
+    await AsyncStorage.removeItem('isLoggedIn');
+    router.replace('/screens/login')
+  }
   return (
     <ScrollView style={styles.container}>
       
@@ -62,7 +69,7 @@ export default function HomeScreen() {
       <Text style={styles.black}>Add Money</Text>
     </View>
     </Link>
-    <Link href='../screens/withdraw'>
+    <Link href='../screens/LoginScreen'>
     <View style={styles.fimageContainer}>
       <Image source={require('../../assets/images/withdraw.png')} style={styles.frameImage} />
       <Text style={styles.black}>Withdraw</Text>
